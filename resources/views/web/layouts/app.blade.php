@@ -16,7 +16,7 @@
     <script>
         let tg = window?.Telegram.WebApp?.initData;
     </script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+{{--    @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
 </head>
 <body>
         @yield('content')
