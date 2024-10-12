@@ -4,20 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Plan;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function show(Request $request, $plan_id = null, $user_id = null)
+    public function show(Request $request, $product_id = null, $user_id = null)
     {
         $order = null;
-        $plan = Plan::findOrFail($plan_id);
+        $product = Product::findOrFail($product_id);
         $user = User::findOrFail($user_id);
 
-        if ($plan && $user) {
+        if ($product && $user) {
             // Проверяем, существует ли уже заказ для данного пользователя и плана
-            $order = Order::where('plan_id', $plan_id)
+            $order = Order::where('product_id', $product_id)
                 ->where('user_id', $user_id)
                 ->where('status', 1)
                 ->first();
@@ -25,9 +26,9 @@ class OrderController extends Controller
             if (!$order) {
                 // Если заказа нет, создаем новый
                 $order = new Order();
-                $order->plan_id = $plan_id;
+                $order->product_id = $product_id;
                 $order->user_id = $user_id;
-                $order->price = $plan->price;
+                $order->price = $product->price;
                 $order->save();
             }
         }

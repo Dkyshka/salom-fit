@@ -61,11 +61,11 @@
     <div class="form-container">
         <div class="form-box container">
             @if($order)
-            <h2 class="text-center">{{ $order->plan->name }}</h2>
+            <h2 class="text-center">{{ $order->product->name }}</h2>
             <br>
             <pre class="text-center">{{ number_format($order->plan->price, 0, '', ' ') }}</pre>
             <br>
-            <p class="text-center">{{ $order->plan?->description }}</p>
+            <p class="text-center">{{ $order->product?->description }}</p>
             <hr>
             <div class="text-center mt-4">
                 <form method="POST" action="https://checkout.paycom.uz">

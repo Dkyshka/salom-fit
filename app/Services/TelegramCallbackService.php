@@ -166,7 +166,7 @@ class TelegramCallbackService
                             'text' => 'Karta orqali to`lov (Powered by Payme)',
                             'web_app' => [
                                 // Тут меняем домен
-                                'url' => "https://jahoncommunitybot.uz/checkout/$tariff->id/".$this->user->id
+                                'url' => "https://poddomen.jahoncommunitybot.uz/checkout/$tariff->id/".$this->user->id
                             ]
                         ],
                     ],
@@ -329,7 +329,7 @@ class TelegramCallbackService
                                 'text' => 'Karta orqali to`lov (Powered by Payme)',
                                 'web_app' => [
                                     // Тут меняем домен
-                                    'url' => "https://jahoncommunitybot.uz/checkout/$product->id/" . $this->user->id
+                                    'url' => "https://poddomen.jahoncommunitybot.uz/checkout/$product->id/" . $this->user->id
                                 ]
                             ],
                         ],
