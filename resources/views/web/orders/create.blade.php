@@ -63,7 +63,7 @@
             @if($order)
             <h2 class="text-center">{{ $order->product->name }}</h2>
             <br>
-            <pre class="text-center">{{ number_format($order->plan->price, 0, '', ' ') }}</pre>
+            <pre class="text-center">{{ number_format($order->product->price, 0, '', ' ') }}</pre>
             <br>
             <p class="text-center">{{ $order->product?->description }}</p>
             <hr>
