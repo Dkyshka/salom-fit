@@ -33,7 +33,7 @@ class PaymeMiddleware
         // \Log::info('Username and Password: ' . $username . ':' . $password);
         $expectedUsername = "Paycom";
         // Для тестов тут тестовый ключ указывается
-        $expectedPassword = env('PAYME_KEY');
+        $expectedPassword = env('PAYME_KEY_DEV');
 
         if ($username !== $expectedUsername || $password !== $expectedPassword) {
             return response()->json([

@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             'name' => 'Ketto menu',
             'description' => 'Кетто меню для быстрого похудения',
-            'price' => 1000,
+            'price' => 1500,
             'chat_id' => 2
         ]);
 
