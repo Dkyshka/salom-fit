@@ -101,17 +101,52 @@ class TelegramSendingService
 
     public function sendPhoto(int $chat_id, string $caption, string $image, array $keyboard = [])
     {
+//        $data = [
+//            "chat_id" => $chat_id,
+//            'caption' => $caption,
+//            'photo' => $image,
+//            'reply_markup' => json_encode([
+//                'inline_keyboard' => $keyboard,
+//            ]),
+//
+//        ];
+//
+//        $this->sendRequest('/sendPhoto', $data);
+
+
+        // Подготовка данных для запроса
         $data = [
-            "chat_id" => $chat_id,
+            'chat_id' => $chat_id,
             'caption' => $caption,
-            'photo' => $image,
+            'photo' => curl_file_create($image), // Путь к файлу
             'reply_markup' => json_encode([
                 'inline_keyboard' => $keyboard,
             ]),
-
         ];
 
-        $this->sendRequest('/sendPhoto', $data);
+        // Инициализация cURL
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://api.telegram.org/bot' . $this->token . '/sendPhoto');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+        // Выполнение запроса и закрытие cURL
+        $response = curl_exec($ch);
+
+        // Проверка на ошибки cURL
+        if (curl_errno($ch)) {
+            $error_msg = curl_error($ch);
+            // Логирование ошибки, если что-то пошло не так
+            Log::error('Ошибка cURL: ' . $error_msg);
+        }
+
+        curl_close($ch);
+
+        // Логирование ответа Telegram API
+        Log::info('Ответ Telegram: ' . $response);
+
+        return $response;
     }
 //
 //    public function sendFile()
