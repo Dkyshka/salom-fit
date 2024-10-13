@@ -100,7 +100,7 @@ class TelegramSendingService
         $data = [
             'chat_id' => $chat_id,
             'caption' => $caption,
-            'photo' => curl_file_create($video_path), // Путь к файлу
+            'video' => curl_file_create($video_path), // Путь к видеофайлу
             'supports_streaming' => true,
             'reply_markup' => json_encode([
                 'inline_keyboard' => $keyboard,
