@@ -83,19 +83,53 @@ class TelegramSendingService
 
     public function sendVideo(int $chat_id, string $video_path, string $caption = '', array $keyboard = [])
     {
+//        $data = [
+//            'chat_id' => $chat_id,
+//            'supports_streaming' => true,
+//            'video' => $video_path, // путь к видеофайлу или URL
+//            'caption' => $caption,
+//            'parse_mode' => 'html', // если требуется форматирование
+//            'reply_markup' => json_encode([
+//                'inline_keyboard' => $keyboard,
+//            ])
+//        ];
+//
+//        $this->sendRequest('/sendVideo', $data);
+
+        // Подготовка данных для запроса
         $data = [
             'chat_id' => $chat_id,
-            'supports_streaming' => true,
-//            'video' => 'BAACAgIAAxkBAAIDfmbzy9LH9nRylSdTc8RktuqSwGxBAALYYAACB36YSxB-geKsJigfNgQ', // путь к видеофайлу или URL
-            'video' => $video_path, // путь к видеофайлу или URL
             'caption' => $caption,
-            'parse_mode' => 'html', // если требуется форматирование
+            'photo' => curl_file_create($video_path), // Путь к файлу
+            'supports_streaming' => true,
             'reply_markup' => json_encode([
                 'inline_keyboard' => $keyboard,
-            ])
+            ]),
         ];
 
-        $this->sendRequest('/sendVideo', $data);
+        // Инициализация cURL
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://api.telegram.org/bot' . $this->token . '/sendVideo');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+        // Выполнение запроса и закрытие cURL
+        $response = curl_exec($ch);
+
+        // Проверка на ошибки cURL
+        if (curl_errno($ch)) {
+            $error_msg = curl_error($ch);
+            // Логирование ошибки, если что-то пошло не так
+            Log::error('Ошибка cURL: ' . $error_msg);
+        }
+
+        curl_close($ch);
+
+        // Логирование ответа Telegram API
+        Log::info('Ответ Telegram: ' . $response);
+
+        return $response;
     }
 
 
