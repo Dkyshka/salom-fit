@@ -17,8 +17,8 @@ class PaymentRequest extends FormRequest
     public function prepareForValidation()
     {
         $this->merge([
-            'card' => preg_replace('/\s+/', '', $this->card),
-            'card_date' => preg_replace('/\s+/', '', $this->card_date), // Убираем пробелы
+            'card_number' => preg_replace('/\s+/', '', $this->card_number),
+            'expiry_date' => preg_replace('/\s+/', '', $this->expiry_date), // Убираем пробелы
         ]);
     }
 
@@ -30,8 +30,8 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'card' => ['required', 'regex:/^\d{16}$/'], // Регулярка для проверки 16 цифр
-            'card_date' => [
+            'card_number' => ['required', 'regex:/^\d{16}$/'], // Регулярка для проверки 16 цифр
+            'expiry_date' => [
                 'required',
                 'regex:/^(0[1-9]|1[0-2])\/?([0-9]{2})$/', // Формат ММ/ГГ
                 function ($attribute, $value, $fail) {
@@ -54,7 +54,10 @@ class PaymentRequest extends FormRequest
     public function messages(): array
     {
         return [
-
+            'card_number.required' => 'Введите номер карты',
+            'card_number.regex' => 'Введите корректный номер карты',
+            'expiry_date.required' => 'Введите срок карты',
+            'expiry_date.regex' => 'Введите корректный срок карты',
         ];
     }
 }

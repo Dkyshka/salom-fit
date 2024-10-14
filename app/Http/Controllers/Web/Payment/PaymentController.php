@@ -14,8 +14,8 @@ class PaymentController extends Controller
         return view('web.payment', compact('plan'));
     }
 
-    public function prepare(PaymentRequest $paymentRequest, Plan $plan)
+    public function store(PaymentRequest $paymentRequest, ?Plan $plan)
     {
-        
+        dd($paymentRequest->all());
     }
 }

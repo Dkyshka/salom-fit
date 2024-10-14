@@ -19,20 +19,20 @@
                         <p class="pay__text">{{ $plan->name }} — <b>{{ $plan->price ? number_format($plan->price, 0, '', ' ') : '' }}</b>
                         </p>
                     </div>
-{{--                    @if($errors->any())--}}
-{{--                        @dump($errors->all())--}}
-{{--                    @endif--}}
 
-                    <form action="{{ route('payment_prepare', $plan->id) }}" class="pay__form form-pay" method="POST">
+                    <div id="errors"></div>
+
+                    <form action="{{ route('payment_store', $plan->id) }}" class="pay__form form-pay" method="POST">
                         @csrf
                         <div class="form-pay__card card" style="border: none">
+                            <input type="hidden" id="plan" value="{{ $plan->id }}">
                             <div class="card__top">
-                                <input id="CardNumber" autocomplete="off" type="text" name="card" placeholder="0000 0000 0000 0000" inputmode="numeric" class="input">
+                                <input id="CardNumber" autocomplete="off" type="text" placeholder="0000 0000 0000 0000" inputmode="numeric" class="input">
                                 <div id="CardType" class="card__bank"></div>
                             </div>
                             <div class="card__bottom" style="align-items: center">
                                 <div class="card__day">
-                                    <input id="expiryDate" autocomplete="off" type="text" name="card_date" placeholder="ММ/ГГ" inputmode="numeric" class="input">
+                                    <input id="expiryDate" autocomplete="off" type="text" placeholder="ММ/ГГ" inputmode="numeric" class="input">
                                 </div>
 
                                 <div class="card__day">

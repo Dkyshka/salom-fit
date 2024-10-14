@@ -111,9 +111,9 @@ Route::middleware(['auth'])->group(function() {
         ->where('plan', '[0-9]')
         ->name('payment');
 
-    Route::post('payment/{plan?}/prepare', [PaymentController::class, 'prepare'])
+    Route::post('payment/store/{plan?}', [PaymentController::class, 'store'])
         ->where('plan', '[0-9]')
-        ->name('payment_prepare');
+        ->name('payment_store');
 });
 
 //// Профиль

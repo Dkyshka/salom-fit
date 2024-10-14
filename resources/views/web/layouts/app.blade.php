@@ -11,12 +11,11 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-{{--    <link rel="stylesheet" href="https://a505-146-158-19-144.ngrok-free.app/assets/css/style.css">--}}
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window?.Telegram.WebApp?.initData;
     </script>
-{{--    @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
+{{--    @vite(['resources/js/app.js'])--}}
 </head>
 <body>
         @yield('content')
@@ -37,5 +36,6 @@
 {{--</script>--}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
-{{--<script src="https://a505-146-158-19-144.ngrok-free.app/assets/js/app.js"></script>--}}
+<script src="{{ asset('build/assets/app-BQffFUWg.js') }}"></script>
+<script src="{{ asset('assets/js/axios.js') }}"></script>
 </html>
