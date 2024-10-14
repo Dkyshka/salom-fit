@@ -2,105 +2,75 @@
 
 @section('content')
 
-    <div class="form-container">
-        <div class="form-box container">
-            <!-- Gutter g-1 -->
-            <div class="row g-1 mt-3">
-                <div class="col">
-                    <!-- Card Number input -->
-                    <div data-mdb-input-init class="form-outline">
-                        <input type="text" id="card" class="form-control" placeholder="0000 0000 0000 0000">
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container">
+            </div>
+        </header>
+        <main class="page">
+
+            <section class="pay">
+                <div class="pay__container">
+
+                    <a href="#" class="page__back _icon-back"></a>
+
+                    <div class="pay__top">
+                        <h1 class="pay__title title">Оплата</h1>
+                        <p class="pay__text">{{ $plan->name }} — <b>{{ $plan->price ? number_format($plan->price, 0, '', ' ') : '' }}</b>
+                        </p>
                     </div>
+{{--                    @if($errors->any())--}}
+{{--                        @dump($errors->all())--}}
+{{--                    @endif--}}
+
+                    <form action="{{ route('payment_prepare', $plan->id) }}" class="pay__form form-pay" method="POST">
+                        @csrf
+                        <div class="form-pay__card card" style="border: none">
+                            <div class="card__top">
+                                <input id="CardNumber" autocomplete="off" type="text" name="card" placeholder="0000 0000 0000 0000" inputmode="numeric" class="input">
+                                <div id="CardType" class="card__bank"></div>
+                            </div>
+                            <div class="card__bottom" style="align-items: center">
+                                <div class="card__day">
+                                    <input id="expiryDate" autocomplete="off" type="text" name="card_date" placeholder="ММ/ГГ" inputmode="numeric" class="input">
+                                </div>
+
+                                <div class="card__day">
+                                    <label for="checkbox" style="cursor: pointer">Запомнить карту</label>
+                                    <input id="checkbox" type="checkbox" name="remember" placeholder="ММ/ГГ" style="cursor: pointer">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pay__bottom">
+                            <button id="payButton" class="form-pay__button button">Оплатить</button>
+                        </div>
+
+                        <!-- Information text -->
+                        <div class="pay__top">
+                            <p class="pay__text">To’lovlar faqatgina UzCard va Humo kartalari orqali amalga oshiriladi.<br />
+                                Xavfsizlik maqsadida sizning bank kartangiz ma’lumotlari PayMe xizmatining serverlarida saqlanadi.<br />
+                            </p>
+                            <a style="color: #0a6aa1;" class="pay__text" target="_blank" href="https://cdn.payme.uz/terms/main.html?target=_blank">Payme ofertasi</a>
+                        </div>
+
+                        <!-- Logo and Powered by text -->
+                        <div class="logo-container" style="width: 30%;">
+                            <img style="width: 100%; margin-bottom: 20px;" src="{{ asset('assets/img/payme.png') }}" alt="Payme Logo">
+                            <div class="pay__text" style="font-size: 14px;">Powered by Payme</div>
+                        </div>
+
+                    </form>
+
+
                 </div>
+            </section>
+
+        </main>
+        <footer class="footer">
+            <div class="footer__container">
             </div>
-
-            <div class="row g-1 mt-3">
-
-                <div class="col">
-                    <!-- Card Number input -->
-                    <div data-mdb-input-init class="form-outline">
-                        <input type="text" id="expirense" class="form-control" placeholder="00/00">
-                    </div>
-                </div>
-            </div>
-
-            <hr />
-
-            <!-- Information text -->
-            <div class="info-text">
-                To’lovlar faqatgina UzCard va Humo kartalari orqali amalga oshiriladi.<br />
-                Xavfsizlik maqsadida sizning bank kartangiz ma’lumotlari PayMe xizmatining serverlarida saqlanadi.<br />
-                <a target="_blank" href="https://cdn.payme.uz/terms/main.html?target=_blank">Payme ofertasi</a>
-            </div>
-
-            <!-- Logo and Powered by text -->
-            <div class="logo-container">
-                <img src="{{ asset('assets/img/payme.png') }}" alt="Payme Logo">
-                <div class="powered-by">Powered by Payme</div>
-            </div>
-
-            <!-- Кнопка отправки данных (без action) -->
-            <div class="text-center mt-4">
-                <button class="btn btn-primary" id="submitPayment">Оплатить</button>
-            </div>
-
-        </div>
+        </footer>
     </div>
 
-{{--    <script>--}}
-{{--        // Форматирование ввода номера карты--}}
-{{--        document.getElementById('card').addEventListener('input', function (e) {--}}
-{{--            let value = e.target.value.replace(/\D/g, ''); // Убираем всё, кроме цифр--}}
-
-{{--            if (value.length > 16) {--}}
-{{--                value = value.slice(0, 16); // Обрезаем до 16 цифр--}}
-{{--            }--}}
-
-{{--            let formattedValue = value.match(/.{1,4}/g); // Группируем по 4 цифры--}}
-{{--            e.target.value = formattedValue ? formattedValue.join(' ') : ''; // Добавляем пробелы--}}
-{{--        });--}}
-
-{{--        // Форматирование ввода срока действия карты--}}
-{{--        document.getElementById('expirense').addEventListener('input', function (e) {--}}
-{{--            let value = e.target.value.replace(/\D/g, ''); // Убираем всё, кроме цифр--}}
-{{--            if (value.length >= 3) {--}}
-{{--                value = value.slice(0, 2) + '/' + value.slice(2, 4); // Форматируем как MM/YY--}}
-{{--            }--}}
-{{--            e.target.value = value;--}}
-{{--        });--}}
-
-{{--        document.getElementById('submitPayment').addEventListener('click', function () {--}}
-{{--            // Собираем данные карты--}}
-{{--            const cardNumber = document.getElementById('card').value.replace(/\s/g, ''); // Удаляем пробелы--}}
-{{--            const expirationDate = document.getElementById('expirense').value; // Формат MM/YY--}}
-
-{{--            // Логируем данные карты (не забудьте удалить это на продакшене)--}}
-{{--            console.log({ cardNumber, expirationDate });--}}
-
-{{--            // Отправляем данные на бэкэнд через AJAX (например, с помощью fetch)--}}
-{{--            fetch('{{ route('payment_create') }}', {--}}
-{{--                method: 'POST',--}}
-{{--                headers: {--}}
-{{--                    'Content-Type': 'application/json',--}}
-{{--                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Если используете CSRF--}}
-{{--                },--}}
-{{--                body: JSON.stringify({--}}
-{{--                    card_number: cardNumber,--}}
-{{--                    expiration_date: expirationDate--}}
-{{--                })--}}
-{{--            })--}}
-{{--                .then(response => response.json())--}}
-{{--                .then(data => {--}}
-{{--                    if (data.error) {--}}
-{{--                        console.error('Ошибка:', data.error);--}}
-{{--                    } else {--}}
-{{--                        console.log('Успешный ответ:', data);--}}
-{{--                        // Обработка успешного ответа--}}
-{{--                    }--}}
-{{--                })--}}
-{{--                .catch((error) => {--}}
-{{--                    console.error('Ошибка:', error);--}}
-{{--                });--}}
-{{--        });--}}
-{{--    </script>--}}
 @endsection

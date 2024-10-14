@@ -29,6 +29,13 @@
 
                     </div>
 
+                    <div class="profile__referal referal">
+                        <div class="referal__buttons">
+                            <a href="{{ route('tariffs') }}" class="referal__button button">Тарифы</a>
+                            </a>
+                        </div>
+                    </div>
+
                     <div class="profile__blocks">
                         <div class="profile__block block-profile">
                             <div class="block-profile__users">

@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
         User::create([
             'chat_id' => 13473069,
             'name' => 'Andrew',
+            'phone' => 998909037045,
             'email' => 'dkyshka25@gmail.com',
             'password' => 'password',
             'in_auth' => 1,

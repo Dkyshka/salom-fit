@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Products\ProductsAdminController;
 use App\Http\Controllers\Admin\Setting\SettingAdminController;
 use App\Http\Controllers\Admin\Users\UserAdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Web\Payment\PaymentController;
 use App\Http\Controllers\Web\TelegramDataController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -99,6 +100,20 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/', function (\Illuminate\Http\Request $request) {
         return view('web.profile');
     })->name('cabinet');
+
+    Route::get('tariffs', function () {
+        $tariffs = \App\Models\Plan::all();
+
+        return view('web.tariffs', compact('tariffs'));
+    })->name('tariffs');
+
+    Route::get('payment/{plan?}', [PaymentController::class, 'payment'])
+        ->where('plan', '[0-9]')
+        ->name('payment');
+
+    Route::post('payment/{plan?}/prepare', [PaymentController::class, 'prepare'])
+        ->where('plan', '[0-9]')
+        ->name('payment_prepare');
 });
 
 //// Профиль
