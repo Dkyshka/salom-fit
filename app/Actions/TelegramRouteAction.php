@@ -45,6 +45,7 @@ class TelegramRouteAction
             } elseif($callback) {
                 (new TelegramCallbackService($chat_id))->process($callback->data, $callback->id, $callback->message->message_id);
             } elseif($join) {
+                Storage::append('request/1.txt', json_encode($join));
                 JoinRequestService::handle($join);
             }
 
