@@ -14,7 +14,7 @@ class SubscriptionsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::find(2); // Получаем первого пользователя
+        $user = User::find(1); // Получаем первого пользователя
 
         // Создаем подписку на 1 месяц
         Subscription::create([
