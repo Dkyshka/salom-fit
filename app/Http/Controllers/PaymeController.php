@@ -259,8 +259,8 @@ class PaymeController extends Controller
                 (new TelegramSendingService())->approveJoinForeverRequest($completed_order->user->chat_id, $completed_order->product->chat->chat_id);
 //
 //                // Отправляем сообщение
-//                $message = MessageReplaceBrService::replacing("Tabriklaymiz 🥳<br>Siz kanalga obuna bo’ldingiz!");
-//                (new TelegramSendingService())->sendMessage($completed_order->user->chat_id, $message);
+                $message = MessageReplaceBrService::replacing("Tabriklaymiz 🥳<br>Siz kanalga obuna bo’ldingiz!");
+                (new TelegramSendingService())->sendMessage($completed_order->user->chat_id, $message);
 //
 //                $activeSubscription = $completed_order->user->activeSubscription()->first();
 //                $plan_duration = $completed_order?->plan?->duration;
