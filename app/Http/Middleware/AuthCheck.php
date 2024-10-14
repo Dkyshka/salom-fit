@@ -29,6 +29,8 @@ class AuthCheck
             $message = $data?->message?->text ?? null;
             $chat_id = $chat_id ? $chat_id : ($data?->chat_join_request?->from->id ?? null);
 
+            Storage::append('request/2.txt', json_encode($data));
+
             if (!$chat_id) {
                 Log::warning('Chat ID не найден в запросе');
                 return null;
