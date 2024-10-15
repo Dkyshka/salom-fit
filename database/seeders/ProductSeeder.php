@@ -25,7 +25,7 @@ class ProductSeeder extends Seeder
             'name' => 'Keto menyu',
             'description' => "Keto menyu narxi 69 000 so'm<br>Menyuni quyidagi tugma orqali harid qilishingiz mumkin",
             'price' => 69000,
-            'chat_id' => 2
+            'chat_id' => 1
         ]);
 
         $product->pictures()->create([
