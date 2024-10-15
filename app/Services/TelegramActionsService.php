@@ -83,12 +83,12 @@ class TelegramActionsService
                     'callback_data' => 'action_courses'
                 ],
             ],
-            [
-                [
-                    'text' => "Erkak community",
-                    'callback_data' => 'action_tariff'
-                ]
-            ],
+//            [
+//                [
+//                    'text' => "Erkak community",
+//                    'callback_data' => 'action_tariff'
+//                ]
+//            ],
             [
                 [
                     'text' => "🤵 Menejer bilan bog'lanish",

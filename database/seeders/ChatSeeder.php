@@ -13,11 +13,11 @@ class ChatSeeder extends Seeder
      */
     public function run(): void
     {
-        Chat::create([
-            'name' => 'Hair course',
-            'link' => 'https://t.me/+iggd0HPOX2kyYjhi',
-            'chat_id' => '-1002352538275'
-        ]);
+//        Chat::create([
+//            'name' => 'Hair course',
+//            'link' => 'https://t.me/+iggd0HPOX2kyYjhi',
+//            'chat_id' => '-1002352538275'
+//        ]);
 
         Chat::create([
             'name' => 'Ketto menu',

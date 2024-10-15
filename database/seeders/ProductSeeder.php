@@ -13,18 +13,18 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::create([
-            'name' => 'Hair course',
-            'description' => 'Курсы по волосам',
-            'video' => 'files/videos/nlo.mp4',
-            'price' => 1000,
-            'chat_id' => 1
-        ]);
+//        Product::create([
+//            'name' => 'Hair course',
+//            'description' => 'Курсы по волосам',
+//            'video' => 'files/videos/nlo.mp4',
+//            'price' => 1000,
+//            'chat_id' => 1
+//        ]);
 
         $product = Product::create([
-            'name' => 'Ketto menu',
-            'description' => 'Кетто меню для быстрого похудения',
-            'price' => 1500,
+            'name' => 'Keto menyu',
+            'description' => "Keto menyu narxi 69 000 so'm<br>Menyuni quyidagi tugma orqali harid qilishingiz mumkin",
+            'price' => 69000,
             'chat_id' => 2
         ]);
 
