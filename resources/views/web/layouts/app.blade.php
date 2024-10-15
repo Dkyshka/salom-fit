@@ -36,6 +36,6 @@
 {{--</script>--}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
-<script src="{{ asset('build/assets/app-BQffFUWg.js') }}"></script>
+<script src="{{ asset('build/assets/app-bzytrqeq.js') }}"></script>
 <script src="{{ asset('assets/js/axios.js') }}"></script>
 </html>

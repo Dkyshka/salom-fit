@@ -5,6 +5,7 @@ document?.getElementById('payButton')?.addEventListener('click', function(e) {
     const plan = document.getElementById('plan').value.trim();
     const cardNumber = document.getElementById('CardNumber').value.trim();
     const expiryDate = document.getElementById('expiryDate').value.trim();
+    const remember = document.getElementById('remember').checked;
 
     errorsBlock.innerHTML = '';
 
@@ -12,36 +13,37 @@ document?.getElementById('payButton')?.addEventListener('click', function(e) {
     const formData = {
         card_number: cardNumber,
         expiry_date: expiryDate,
+        remember: remember ? 1 : 0
     };
 
     // Отправляем данные через axios
-    axios.post(`/payment/store/${plan}`, formData, {
-        headers: {
-            'X-Auth': '5e730e8e0b852a417aa49ceb',  // Добавляем заголовок X-Auth, если требуется
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(function (response) {
-            // Обработка успешного ответа
-            console.log('Payment successful:', response.data);
-            errorsBlock.innerHTML = ''; // Если успешно, очищаем ошибки
-        })
-        .catch(function (error) {
-            // Обработка ошибки
-            console.error('Payment failed:', error.response);
-            // Если валидация не прошла, выводим ошибки
-            if (error.response && error.response.data && error.response.data.errors) {
-                const errors = error.response.data.errors;
+    axios.post(`/payment/store/${plan}`, formData)
+    .then(function (response) {
+        // Обработка успешного ответа
+        errorsBlock.innerHTML = ''; // Если успешно, очищаем ошибки
 
-                // Проходим по ошибкам и добавляем их в блок с id 'errors'
-                Object.keys(errors).forEach(function (field) {
-                    errors[field].forEach(function (message) {
-                        const errorItem = document.createElement('p');
-                        errorItem.classList.add('text-danger');
-                        errorItem.textContent = message;
-                        errorsBlock.appendChild(errorItem);
-                    });
+        if (response.data?.error) {
+                const errorItem = document.createElement('p');
+                errorItem.classList.add('text-danger');
+                errorItem.textContent = response.data?.error;
+                errorsBlock.appendChild(errorItem);
+        }
+
+    })
+    .catch(function (error) {
+        // Если валидация не прошла, выводим ошибки
+        if (error.response && error.response.data && error.response.data.errors) {
+            const errors = error.response.data.errors;
+
+            // Проходим по ошибкам и добавляем их в блок с id 'errors'
+            Object.keys(errors).forEach(function (field) {
+                errors[field].forEach(function (message) {
+                    const errorItem = document.createElement('p');
+                    errorItem.classList.add('text-danger');
+                    errorItem.textContent = message;
+                    errorsBlock.appendChild(errorItem);
                 });
-            }
-        });
+            });
+        }
+    });
 });

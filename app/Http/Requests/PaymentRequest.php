@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PaymentRequest extends FormRequest
 {
@@ -30,6 +31,7 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'remember' => Rule::in([0, 1]),
             'card_number' => ['required', 'regex:/^\d{16}$/'], // Регулярка для проверки 16 цифр
             'expiry_date' => [
                 'required',
@@ -54,6 +56,7 @@ class PaymentRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'remember.in' => 'Неккоректные данные',
             'card_number.required' => 'Введите номер карты',
             'card_number.regex' => 'Введите корректный номер карты',
             'expiry_date.required' => 'Введите срок карты',

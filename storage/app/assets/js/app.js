@@ -139,7 +139,7 @@
                             )),
                             n.addEventListener("input", (function(e) {
                                     n.value = i(n.value),
-                                    5 === n.value.length && l.focus()
+                                    5 === n.value.length && l?.focus()
                                         // u()
                                 }
                             )),

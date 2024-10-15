@@ -12,7 +12,7 @@
             <section class="pay">
                 <div class="pay__container">
 
-                    <a href="#" class="page__back _icon-back"></a>
+                    <a href="{{ route('tariffs') }}" class="page__back _icon-back"></a>
 
                     <div class="pay__top">
                         <h1 class="pay__title title">Оплата</h1>
@@ -22,22 +22,22 @@
 
                     <div id="errors"></div>
 
-                    <form action="{{ route('payment_store', $plan->id) }}" class="pay__form form-pay" method="POST">
+                    <form action="{{ route('payment_store', $plan->id) }}" class="pay__form form-pay">
                         @csrf
                         <div class="form-pay__card card" style="border: none">
                             <input type="hidden" id="plan" value="{{ $plan->id }}">
                             <div class="card__top">
-                                <input id="CardNumber" autocomplete="off" type="text" placeholder="0000 0000 0000 0000" inputmode="numeric" class="input">
+                                <input id="CardNumber" autocomplete="off" type="text" required placeholder="0000 0000 0000 0000" inputmode="numeric" class="input">
                                 <div id="CardType" class="card__bank"></div>
                             </div>
                             <div class="card__bottom" style="align-items: center">
                                 <div class="card__day">
-                                    <input id="expiryDate" autocomplete="off" type="text" placeholder="ММ/ГГ" inputmode="numeric" class="input">
+                                    <input id="expiryDate" required autocomplete="off" type="text" placeholder="ММ/ГГ" inputmode="numeric" class="input">
                                 </div>
 
                                 <div class="card__day">
-                                    <label for="checkbox" style="cursor: pointer">Запомнить карту</label>
-                                    <input id="checkbox" type="checkbox" name="remember" placeholder="ММ/ГГ" style="cursor: pointer">
+                                    <label for="remember" style="cursor: pointer">Запомнить карту</label>
+                                    <input id="remember" type="checkbox" placeholder="ММ/ГГ" style="cursor: pointer">
                                 </div>
                             </div>
                         </div>
