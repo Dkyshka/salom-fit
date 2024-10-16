@@ -296,7 +296,7 @@ class TelegramCallbackService
 
                 if (!$requestChat) {
 
-                    $message = 'Отравьте заявку на вступление';
+                    $message = "Qo'shilish uchun arizangizni yuboring";
 
                     $keyboard = [
                         [
