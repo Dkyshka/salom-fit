@@ -147,11 +147,6 @@ class TelegramSendingService
 //
 //        $this->sendRequest('/sendPhoto', $data);
 
-        // Конвертируем текст в UTF-8
-        $caption = mb_convert_encoding($caption, 'UTF-8', 'auto');
-
-        // Экранируем специальные символы
-        $caption = htmlspecialchars($caption, ENT_QUOTES, 'UTF-8');
 
         // Подготовка данных для запроса
         $data = [
@@ -161,7 +156,6 @@ class TelegramSendingService
             'reply_markup' => json_encode([
                 'inline_keyboard' => $keyboard,
             ]),
-            "parse_mode" => "html",
         ];
 
         // Инициализация cURL
