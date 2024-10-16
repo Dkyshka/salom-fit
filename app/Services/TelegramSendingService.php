@@ -161,7 +161,7 @@ class TelegramSendingService
             'reply_markup' => json_encode([
                 'inline_keyboard' => $keyboard,
             ]),
-            "parse_mode" => "markdown",
+            "parse_mode" => "html",
         ];
 
         // Инициализация cURL
