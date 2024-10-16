@@ -65,7 +65,7 @@
             <br>
             <pre class="text-center">{{ number_format($order->product->price, 0, '', ' ') }}</pre>
             <br>
-            <p class="text-center">{{ $order->product?->description }}</p>
+            <p class="text-center">{!! $order->product?->description !!}</p>
             <hr>
             <div class="text-center mt-4">
                 <form method="POST" action="https://checkout.paycom.uz">
