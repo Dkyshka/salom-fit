@@ -20,32 +20,44 @@ class TelegramCallbackService
 
     public function process(string $callback, string $callback_id, $message_id)
     {
-//        if ($callback === 'offer_success') {
-//
-//            if (!$this->user->confirm_offer) {
-//
-//                $keyboard = [
-//                    [
-//                        [
-//                            'text' => "Kanalga obuna bo'lish",
-//                            'url' => env('TELEGRAM_BOT_CHANNEL_INVITE_PROD')
-//                        ]
-//                    ],
-//                ];
-//
-//                (new TelegramSendingService())
-//                    ->sendVideo($this->user->chat_id, '', '', $keyboard);
-//            }
-//
-//            $this->user->update([
-//                'confirm_offer' => true
-//            ]);
-//
-//            // Подтверждаем обработку callback
-//            (new TelegramSendingService())->answerCallback($this->user->chat_id, $callback_id, '✅');
-//
-//            (new TelegramSendingService())->removeMessage($this->user->chat_id, $message_id);
-//        }
+        if ($callback === 'offer_success') {
+
+            if (!$this->user->confirm_offer) {
+
+                $keyboard = [
+                    [
+                        [
+                            'text' => 'Salomfit kurslar',
+                            'callback_data' => 'action_courses'
+                        ],
+                    ],
+        //            [
+        //                [
+        //                    'text' => "Erkak community",
+        //                    'callback_data' => 'action_tariff'
+        //                ]
+        //            ],
+                    [
+                        [
+                            'text' => "🤵 Menejer bilan bog'lanish",
+                            'url' => $this->setting->markup?->manager,
+                        ]
+                    ],
+                ];
+
+                (new TelegramSendingService())
+                    ->sendVideo($this->user->chat_id, url('files/videos/lesson.mp4'), '', $keyboard);
+            }
+
+            $this->user->update([
+                'confirm_offer' => true
+            ]);
+
+            // Подтверждаем обработку callback
+            (new TelegramSendingService())->answerCallback($this->user->chat_id, $callback_id, '✅');
+
+            (new TelegramSendingService())->removeMessage($this->user->chat_id, $message_id);
+        }
 
 
         if ($callback === 'action_tariff') {
