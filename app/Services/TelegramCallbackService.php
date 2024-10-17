@@ -224,6 +224,10 @@ class TelegramCallbackService
 
                 $message = MessageReplaceBrService::replacing($product?->description);
 
+                $requestChat = JoinChatRequest::where('user_id', $this->user->chat_id)
+                    ->where('chat_id', $product->chat->chat_id)
+                    ->first();
+
                 $keyboard = [
                     [
                         [
@@ -231,35 +235,38 @@ class TelegramCallbackService
                             'url' => $product->chat->link  // Ссылка на приглашение в канал
                         ]
                     ],
-                    [
+                ];
+
+                // Проверяем, существует ли запрос на присоединение
+                if (!$requestChat) {
+                    // Если запроса нет, добавляем кнопку подтверждения
+                    $keyboard[] = [
                         [
                             'text' => "Obuna boʻlishni tasdiqlang",
                             'callback_data' => "confirm_$product->id"  // `callback_data` для дальнейшего взаимодействия
                         ]
-                    ],
+                    ];
+                }
+
+                // Добавляем кнопку "⬅ Orqaga"
+                $keyboard[] = [
                     [
-                        [
-                            'text' => '⬅ Orqaga',
-                            'callback_data' => 'action_courses'
-                        ]
+                        'text' => '⬅ Orqaga',
+                        'callback_data' => 'action_courses'
                     ]
                 ];
-
 
 //                $keyboard = [
 //                    [
 //                        [
-//                            'text' => 'Karta orqali to`lov (Powered by Payme)',
-//                            'web_app' => [
-//                                // Тут меняем домен
-//                                'url' => "https://jahoncommunitybot.uz/checkout/$product->id/".$this->user->id
-//                            ]
-//                        ],
+//                            'text' => "Kanalga obuna bo'lish",
+//                            'url' => $product->chat->link  // Ссылка на приглашение в канал
+//                        ]
 //                    ],
 //                    [
 //                        [
-//                            'text' => "🤵 Menejer bilan bog'lanish",
-//                            'url' => $this->setting->markup?->manager,
+//                            'text' => "Obuna boʻlishni tasdiqlang",
+//                            'callback_data' => "confirm_$product->id"  // `callback_data` для дальнейшего взаимодействия
 //                        ]
 //                    ],
 //                    [
@@ -269,6 +276,7 @@ class TelegramCallbackService
 //                        ]
 //                    ]
 //                ];
+
 
                 if ($product?->video) {
                     (new TelegramSendingService())
