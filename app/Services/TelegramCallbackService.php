@@ -307,7 +307,7 @@ class TelegramCallbackService
                         ],
                         [
                             [
-                                'text' => "Подтвердить вступление",
+                                'text' => "Obuna boʻlishni tasdiqlang",
                                 'callback_data' => "confirm_$product->id"  // `callback_data` для дальнейшего взаимодействия
                             ]
                         ],
