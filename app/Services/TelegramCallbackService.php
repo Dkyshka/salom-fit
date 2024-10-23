@@ -238,7 +238,7 @@ class TelegramCallbackService
                 ];
 
                 // Проверяем, существует ли запрос на присоединение
-                if (!$requestChat) {
+//                if (!$requestChat) {
                     // Если запроса нет, добавляем кнопку подтверждения
                     $keyboard[] = [
                         [
@@ -246,7 +246,7 @@ class TelegramCallbackService
                             'callback_data' => "confirm_$product->id"  // `callback_data` для дальнейшего взаимодействия
                         ]
                     ];
-                }
+//                }
 
                 // Добавляем кнопку "⬅ Orqaga"
                 $keyboard[] = [
