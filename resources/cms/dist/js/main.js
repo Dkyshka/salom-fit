@@ -16,7 +16,7 @@ function summernote() {
             },
             inline_styles: false,
             // Вставляемый только текст
-            paste_as_text: false,
+            paste_as_text: true,
             // Удаляем все инлайн стили
             paste_remove_styles_if_webkit: true,
             paste_remove_styles: true,
