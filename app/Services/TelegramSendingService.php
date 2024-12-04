@@ -126,9 +126,6 @@ class TelegramSendingService
 
         curl_close($ch);
 
-        // Логирование ответа Telegram API
-        Log::info('Ответ Telegram: ' . $response);
-
         return $response;
     }
 
@@ -176,9 +173,6 @@ class TelegramSendingService
         }
 
         curl_close($ch);
-
-        // Логирование ответа Telegram API
-        Log::info('Ответ Telegram: ' . $response);
 
         return $response;
     }
